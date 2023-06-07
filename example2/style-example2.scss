@@ -5,11 +5,11 @@
 }
 
 body {
-    padding-bottom: 100dvh;
+    padding-bottom: 100vh;
 }
 
 .top {
-    padding: 35dvh 0;
+    padding: 35vh 0;
     font-size: 3rem;
     text-align: center;
 
@@ -18,10 +18,9 @@ body {
         margin: 10px auto 0;
     }
 }
-
 .video {
     &__container {
-        min-height: 330vh;
+        min-height: 300vh;
         padding-bottom: 1px;
     }
     &__text {
@@ -30,12 +29,12 @@ body {
         //text-align: center;
         position: relative;
         z-index: 9;
-        padding-bottom: 100dvh;
+        padding-bottom: 100vh;
         max-width: 600px;
         padding-left: 100px;
 
         h1,h2 {
-            margin-bottom: 100dvh;
+            margin-bottom: 100vh;
             text-shadow: 0 0 20px rgba($color: #000, $alpha: 0.3);
             line-height: 1.5em;
             //display: none;
