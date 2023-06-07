@@ -1,1 +1,152 @@
-Example 3
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+	font-family: Impact, Charcoal, sans-serif;
+}
+.space {
+	font-size: 126px;
+	padding: 100px;
+	height: 600px;
+	background: grey;
+	color: white;
+	text-align: center;
+}
+.sticky_div {
+	height: 1925px;
+	background: transparent;
+	color: grey;
+	text-align: center;
+}
+h3 {
+	position: relative;
+	z-index: 9;
+	opacity: 0;
+}
+h3.show {
+	opacity: 1;
+}
+.sticky_text{
+	width: 250px;
+	margin: auto;
+}
+.sticky_element {
+	max-height: 400px;
+	right: auto;
+	Left: auto;
+	padding: 20px 0 200px 0 !important;
+	position: sticky;
+	top: 30px;
+	left: auto;
+	right: auto;
+	margin: 30px;
+}
+#images {
+	text-align: center;
+	z-index: 0;
+	height: 2000px;
+}
+
+.sequencer {
+	width: 100%;
+	max-width: 100%;
+}
+    </style>
+  </head>
+  <body>
+    <div class="space">Scroll Down</div>
+
+<div class="sticky_div">
+	<div class="sticky_element">
+		<div id="images">
+			<img class="sequencer" src="./images/0.jpg">
+		</div>
+	</div>
+
+	<div class="sticky_text" id="trigger1">
+		<h3 class="text-toggle1" id="pin1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+		</h3>
+	</div>
+	<div class="sticky_text" id="trigger2">
+		<h3 class="text-toggle2" id="pin2">Nulla mi ligula, cursus eu ipsum ac, convallis aliquam lectus.
+		</h3>
+	</div>
+	<div class="sticky_text" id="trigger3">
+		<h3 class="text-toggle3" id="pin3">Donec sed ipsum ligula.
+		</h3>
+	</div>
+	<div class="sticky_text" id="trigger4">
+		<h3 class="text-toggle4" id="pin4">Sed ac orci tempor, viverra sapien vel, aliquet nibh.
+		</h3>
+	</div>
+</div>
+
+<div class="space"></div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="jquery-sequencer.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <script>
+      (function($) {
+
+$.fn.sequencer = function(options, cb) {
+
+  var self = this,
+      paths = [],
+      load = 0,
+      sectionHeight,
+      windowHeight,
+      currentScroll,
+      scrollStopper,
+      animationScroll,
+      percentageScroll,
+      index;
+      
+  if(options.path.substr(-1) === "/") {
+    options.path = options.path.substr(0, options.path.length - 1)
+  }
+
+  for (var i = 0; i <= options.count; i++) {
+    paths.push(options.path + "/" + i + "." + options.ext);
+  }
+  
+  var switchOn = $(".sticky_div").offset().top;
+  console.log(switchOn);
+  $(window).scroll(function() {
+    sectionHeight = $(self).height();
+    windowHeight = $(this).height();
+    currentScroll = $(this).scrollTop();
+    animationScroll = currentScroll - switchOn;
+    percentageScroll = 100 * animationScroll / (sectionHeight - windowHeight);
+    index = Math.round(percentageScroll / 100 * options.count);
+    if (currentScroll >= switchOn) {
+      if (index < options.count) {
+        $("img.sequencer").attr("src", paths[index]);
+      }
+    } else {
+      scrollStopper = $(window).scrollTop();
+    }
+  });
+
+  return this;
+
+};
+}(jQuery));
+
+$("div#images").sequencer({
+count: 1232,
+path: "./images/",
+ext: "jpg"
+});
+
+// var controller = new ScrollMagic.Controller();
+// var scene = new ScrollMagic.Scene{(
+//	triggerElement:
+// )};
+var controller = new ScrollMagic.Controller();
+
+
+    </script>
+  </body>
+</html>
