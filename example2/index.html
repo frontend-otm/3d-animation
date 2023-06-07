@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example 2</title>
+    <title>Play Video on Scroll!</title>
+    <link rel="stylesheet" href="/public/css/style-example2.min.css">
 </head>
 <body>
-    <h1>Example 2</h1>
+    <div class="top">Scroll Down<img src="https://img.icons8.com/material-rounded/24/down.svg" alt="down"/></div>
+    <div class="video__container" uk-parallax="opacity: 1,1,1,1,1,1,0;">
+        <div id="scrolly-video"></div>
+        <div class="video__text">
+            <h1 uk-parallax="blur: 10,0,0,0,0,0,0,0,10,10,10;">Play Video on Scroll!</h1>
+            <h2 uk-parallax="blur: 10,0,0,0,0,0,0,0,10,10,10">Lorem ipsum dolor <br>sit amet consectetur adipisicing elit.</h2>
+            <h2 uk-parallax="blur: 10,0,0,0,0,0,0,0,10,10,10">Corrupti exercitationem <br>rem culpa nesciunt.</h2>
+        </div>
+    </div>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> -->
+    <!-- <script src="/script.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/scrolly-video@latest/dist/scrolly-video.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/js/uikit-core.min.js" integrity="sha512-PVuP9mKKMDlQ0zH2LYiyawFfgS/VTBQb06/sjwd2uitTb+IdMWIj2EMm4tQWt9wP9iaPIcN6CyvZDLFVgQaKAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/js/components/parallax.min.js" integrity="sha512-u9Ib5r09NCqcfXPDueYSMlW9A6qObCC05bo21fuKxEHbKGJcQq6+QN84XrX/SCUrxCRL3jl3WISc54RChMgXGw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        new ScrollyVideo({
+            scrollyVideoContainer: "scrolly-video",
+            src: "/example2/video-1.mp4",
+            //src: "https://scrollyvideo.js.org/goldengate.mp4",
+        });
+    </script>
 </body>
 </html>

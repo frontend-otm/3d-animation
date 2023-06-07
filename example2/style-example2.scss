@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-bottom: 100dvh;
+}
+
+.top {
+    padding: 35dvh 0;
+    font-size: 3rem;
+    text-align: center;
+
+    img {
+        display: block;
+        margin: 10px auto 0;
+    }
+}
+
+.video {
+    &__container {
+        //height: 300dvh;
+        padding-bottom: 1px;
+    }
+    &__text {
+        color: white;
+        //background-color: black;
+        text-align: center;
+        position: relative;
+        z-index: 9;
+        padding-bottom: 100dvh;
+
+        h1,h2 {
+            margin-bottom: 100dvh;
+            text-shadow: 0 0 20px rgba($color: #000, $alpha: 0.3);
+            line-height: 1.5em;
+        }
+        h1 {
+            font-size: 5rem;
+        }
+        h2 {
+            font-size: 4rem;
+        }
+    }
+}
