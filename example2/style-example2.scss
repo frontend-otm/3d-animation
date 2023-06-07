@@ -21,27 +21,34 @@ body {
 
 .video {
     &__container {
-        //height: 300dvh;
+        min-height: 330vh;
         padding-bottom: 1px;
     }
     &__text {
         color: white;
         //background-color: black;
-        text-align: center;
+        //text-align: center;
         position: relative;
         z-index: 9;
         padding-bottom: 100dvh;
+        max-width: 600px;
+        padding-left: 100px;
 
         h1,h2 {
             margin-bottom: 100dvh;
             text-shadow: 0 0 20px rgba($color: #000, $alpha: 0.3);
             line-height: 1.5em;
+            //display: none;
+
+            br {
+                display: none;
+            }
         }
         h1 {
-            font-size: 5rem;
+            font-size: 3rem;
         }
         h2 {
-            font-size: 4rem;
+            font-size: 2.5rem;
         }
     }
 }
