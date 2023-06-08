@@ -37,7 +37,7 @@
       <div class="scrollContent">
         <section id="titlechart">
           <div id="description">
-            <h1 class="badge gsap">Image Sequence</h1>
+            <h1 class="badge gsap">Image Sequence v2</h1>
             <h2>GIF-like behaviour controlled by the scroll bar</h2>
             <p>
               Animating through image sequences can be achieved by creating a tween that cycles through an array of images (like shown here).<br> A different approach would be to do it without TweenMax and just update the image using the scene <code>progress</code> event.<br> In production environments, you would probably also use an image preloader to cache all images in the array.
@@ -68,7 +68,7 @@
               curImg: 0
             };
 
-            var tween = TweenMax.to(obj, 10, {
+            var tween = TweenMax.to(obj, 2, {
               curImg: images.length - 1,
               roundProps: "curImg",
               immediateRender: true,
@@ -93,7 +93,7 @@
 
             var scene = new ScrollMagic.Scene({
                 triggerElement: "#trigger",
-                duration: 8000
+                duration: 5000
               })
               .setTween(tween)
               .setPin("#imagesequence")
