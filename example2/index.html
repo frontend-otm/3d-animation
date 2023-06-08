@@ -4,14 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Example 2</title>
     <style>
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
-
+        body {
+            font-family: sans-serif;
+        }
+        .top {
+            background-color: gray;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            letter-spacing: 0.5em;
+        }
+        .top img {
+            display: block;
+            margin-top: 30px;
+        }
         canvas {
             max-width: 100vw;
         }
@@ -38,12 +55,10 @@
     </style>
 </head>
 <body>
-    <div class="spacer"></div>
+    <div class="top">Scroll Down<img src="https://img.icons8.com/material-rounded/24/ffffff/down.svg" alt="down"/></div>
     <div class="canvas-container">
         <canvas id="hero-lightpass"></canvas>
     </div>
-    <div class="spacer"></div>
-    <div class="spacer"></div>
     <div class="spacer"></div>
 
 
