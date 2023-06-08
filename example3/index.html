@@ -24,7 +24,11 @@
   <script type="text/javascript" src="https://scrollmagic.io/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
   <script type="text/javascript" src="https://scrollmagic.io/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
 </head>
-
+<style>
+	body{
+		background-color: #fff;
+	}
+</style>
 <body>
   <ul id="menu"></ul>
   <div id="content-wrapper">
@@ -42,29 +46,24 @@
             </p>
           </div>
         </section>
-        <section class="demo">
-          <div class="spacer s2"></div>
-          <div class="spacer s0" id="trigger"></div>
+        <section class="">
+          <div class=" s2"></div>
+          <div class=" s0" id="trigger"></div>
           <div id="imagesequence">
-            <img id="myimg" /><br>
+            <img id="myimg" />
+			<br>
           </div>
-          <div class="spacer s2"></div>
+          <div class=" s2"></div>
           <script>
             // define images
             var images = [];
+            var startNum = 18;
+            var endNum = 125;
 
-            // for (var i = 0; i <= 1435; i++) {
-            //   var imageUrl = "images/" + i + ".jpg";
-            //   images.push(imageUrl);
-            // }
-
-			var startNum = 18;
-			var endNum = 142;
-
-			for (var i = startNum; i <= endNum; i++) {
-				var paddedNum = i.toString().padStart(4, '0');
-				images.push("https://p5c5j6h5.rocketcdn.me/wp-content/uploads/2020/08/scene" + paddedNum + "1.jpg");
-			}
+            for (var i = startNum; i <= endNum; i++) {
+              var paddedNum = i.toString().padStart(4, '0');
+              images.push("https://p5c5j6h5.rocketcdn.me/wp-content/uploads/2020/08/scene" + paddedNum + "1.jpg");
+            }
 
             // TweenMax can tween any property of any object. We use this object to cycle through the array
             var obj = {
@@ -72,15 +71,15 @@
             };
 
             // create tween
-			var tween = TweenMax.to(obj, 2, {
-				curImg: images.length - 1, // animate property curImg to number of images
-				roundProps: "curImg", // only integers so it can be used as an array index
-				immediateRender: true, // load first image automatically
-				ease: Linear.easeNone, // use linear ease for smooth scrolling
-				onUpdate: function() {
-					$("#myimg").attr("src", images[obj.curImg]); // set the image source
-				}
-			});
+            var tween = TweenMax.to(obj, 0.2, {
+              curImg: images.length - 1, // animate property curImg to number of images
+              roundProps: "curImg", // only integers so it can be used as an array index
+              immediateRender: true, // load first image automatically
+              ease: Linear.easeNone, // use linear ease for smooth scrolling
+              onUpdate: function() {
+                $("#myimg").attr("src", images[obj.curImg]); // set the image source
+              }
+            });
 
             // init controller
             var controller = new ScrollMagic.Controller();
@@ -88,15 +87,22 @@
             // build scene
             var scene = new ScrollMagic.Scene({
                 triggerElement: "#trigger",
-                duration: 2000
+                duration: 10000
               })
               .setTween(tween)
-              .addIndicators() // add indicators (requires plugin)
+              .setPin("#imagesequence")
+              .setClassToggle("#imagesequence", "bottom-pin")
+              .addIndicators()
               .addTo(controller);
 
             // Pin the imagesequence section
-            scene.setPin("#imagesequence");
-			scene.offset(470); // Adjust the offset value as needed
+            scene.offset(470);
+
+            // Smooth scrolling
+            var smoothScroll = new SmoothScroll('a[href*="#"]', {
+              speed: 800,
+              easing: 'easeInOutQuad'
+            });
           </script>
         </section>
         <div class="spacer s_viewport"></div>
