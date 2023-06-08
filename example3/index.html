@@ -53,10 +53,18 @@
             // define images
             var images = [];
 
-            for (var i = 0; i <= 1435; i++) {
-              var imageUrl = "images/" + i + ".jpg";
-              images.push(imageUrl);
-            }
+            // for (var i = 0; i <= 1435; i++) {
+            //   var imageUrl = "images/" + i + ".jpg";
+            //   images.push(imageUrl);
+            // }
+
+			var startNum = 18;
+			var endNum = 142;
+
+			for (var i = startNum; i <= endNum; i++) {
+				var paddedNum = i.toString().padStart(4, '0');
+				images.push("https://p5c5j6h5.rocketcdn.me/wp-content/uploads/2020/08/scene" + paddedNum + "1.jpg");
+			}
 
             // TweenMax can tween any property of any object. We use this object to cycle through the array
             var obj = {
@@ -64,16 +72,15 @@
             };
 
             // create tween
-            var tween = TweenMax.to(obj, 0.1, {
-              curImg: images.length - 1, // animate propery curImg to number of images
-              roundProps: "curImg", // only integers so it can be used as an array index
-              repeat: 3, // repeat 3 times
-              immediateRender: true, // load first image automatically
-              ease: Linear.easeNone, // show every image the same ammount of time
-              onUpdate: function() {
-                $("#myimg").attr("src", images[obj.curImg]); // set the image source
-              } 
-            });
+			var tween = TweenMax.to(obj, 2, {
+				curImg: images.length - 1, // animate property curImg to number of images
+				roundProps: "curImg", // only integers so it can be used as an array index
+				immediateRender: true, // load first image automatically
+				ease: Linear.easeNone, // use linear ease for smooth scrolling
+				onUpdate: function() {
+					$("#myimg").attr("src", images[obj.curImg]); // set the image source
+				}
+			});
 
             // init controller
             var controller = new ScrollMagic.Controller();
