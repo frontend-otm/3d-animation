@@ -73,7 +73,7 @@
     <div class="scroll-area scroll-area--l"></div>
     <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
-        <model-viewer id="ModelViewer" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" ar shadow-intensity="0.5" camera-controls touch-action="pan-y" disable-pan -disable-zoom camera-orbit="-35deg 90deg auto" field-of-view="40deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2"></model-viewer>
+        <model-viewer id="ModelViewer" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" ar shadow-intensity="0.5" camera-controls touch-action="pan-y" camera-orbit="-35deg 90deg auto" field-of-view="40deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2"></model-viewer>
     </div>
     <div class="button-control-gp">
         <button id="modelZoomOutButton"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
@@ -88,18 +88,13 @@
         const originalFOV = $('#ModelViewer').attr('field-of-view');
         const originalCameraOrbit = $('#ModelViewer').attr('camera-orbit');
         let fov = 0;
-        $('#ModelViewer').on('camera-change', function(e) {
-            fov = parseInt(e.target.getFieldOfView())
-            console.log(fov)
-        });
-
-
         $('#ModelViewer').on('load', function(e) {
             fov = parseInt(e.target.getFieldOfView())
-            console.log(fov)
+        });
+        $('#ModelViewer').on('camera-change', function(e) {
+            fov = parseInt(e.target.getFieldOfView())
         });
         $('#modelZoomInButton').on('click',function(){
-            console.log('fov before zoom: '+fov)
             if (fov > 0){
                 fov = parseInt(fov) - 10
                 if (fov > 0){
@@ -112,7 +107,6 @@
             }
         });
         $('#modelZoomOutButton').on('click',function(){
-            console.log('fov before zoom: '+fov)
             if (fov <= 90){
                 fov = parseInt(fov) + 10
                 if (fov > 0){
