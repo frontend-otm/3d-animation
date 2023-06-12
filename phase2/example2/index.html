@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example 2</title>
     <style>
+        :root {
+            --scroll-area-size: 90%;
+        }
         * {
             padding: 0;
             margin: 0;
@@ -22,12 +25,12 @@
             z-index: 9;
         }
         .scroll-area--l {
-            left: 70%;
+            left: var(--scroll-area-size);
             right: 0;
         }
         .scroll-area--r {
             left: 0;
-            right: 70%;
+            right: var(--scroll-area-size);
         }
         .model-wrapper {
             width: 100vw;
@@ -84,13 +87,18 @@
         #ar-button img {
             width: 60px;
         }
+        @media (min-width: 768px) {
+            :root {
+                --scroll-area-size: 70%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="scroll-area scroll-area--l"></div>
     <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
-        <model-viewer id="ModelViewer" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" ar shadow-intensity="0.5" camera-controls touch-action="pan-y" camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2">
+        <model-viewer id="ModelViewer" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" ar shadow-intensity="0.5" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2">
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
