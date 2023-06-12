@@ -73,7 +73,7 @@
     <div class="scroll-area scroll-area--l"></div>
     <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
-        <model-viewer id="ModelViewer" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" ar shadow-intensity="0.5" camera-controls touch-action="pan-y" -disable-pan -disable-zoom camera-orbit="-35deg 90deg auto" field-of-view="40deg" data-zoom="40" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2"></model-viewer>
+        <model-viewer id="ModelViewer" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" ar shadow-intensity="0.5" camera-controls touch-action="pan-y" disable-pan -disable-zoom camera-orbit="-35deg 90deg auto" field-of-view="40deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2"></model-viewer>
     </div>
     <div class="button-control-gp">
         <button id="modelZoomOutButton"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
@@ -84,27 +84,48 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script>
+        const modelViewer = document.querySelector('#ModelViewer');
         const originalFOV = $('#ModelViewer').attr('field-of-view');
         const originalCameraOrbit = $('#ModelViewer').attr('camera-orbit');
-        const originalZoom = $('#ModelViewer').attr('data-zoom');
+        let fov = 0;
+        $('#ModelViewer').on('camera-change', function(e) {
+            fov = parseInt(e.target.getFieldOfView())
+            console.log(fov)
+        });
+
+
+        $('#ModelViewer').on('load', function(e) {
+            fov = parseInt(e.target.getFieldOfView())
+            console.log(fov)
+        });
         $('#modelZoomInButton').on('click',function(){
-            const zoom = parseInt($('#ModelViewer').attr('data-zoom')) - 10
-            if (zoom >= 1){
-                $('#ModelViewer').attr('data-zoom', zoom)
-                $('#ModelViewer').attr('field-of-view', zoom+'deg');
+            console.log('fov before zoom: '+fov)
+            if (fov > 0){
+                fov = parseInt(fov) - 10
+                if (fov > 0){
+                    $('#ModelViewer').attr('field-of-view', fov+'deg')
+                }
+                else {
+                    fov = 1;
+                    $('#ModelViewer').attr('field-of-view', fov+'deg')
+                }
             }
-            
         });
         $('#modelZoomOutButton').on('click',function(){
-            const zoom = parseInt($('#ModelViewer').attr('data-zoom')) + 10
-            if (zoom <= 90){
-                $('#ModelViewer').attr('data-zoom', zoom)
-                $('#ModelViewer').attr('field-of-view', zoom+'deg');
+            console.log('fov before zoom: '+fov)
+            if (fov <= 90){
+                fov = parseInt(fov) + 10
+                if (fov > 0){
+                    $('#ModelViewer').attr('field-of-view', fov+'deg')
+                }
+                else {
+                    fov = 1;
+                    $('#ModelViewer').attr('field-of-view', fov+'deg')
+                }
             }
-            
         });
         $('#modelResetButton').on('click',function(){
-            $('#ModelViewer').attr('camera-orbit', originalCameraOrbit).attr('field-of-view', originalFOV).attr('data-zoom', originalZoom);
+            $('#ModelViewer').attr('camera-orbit', originalCameraOrbit).attr('field-of-view', originalFOV);
         });
     </script>
 </body>
