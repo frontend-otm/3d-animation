@@ -31,7 +31,7 @@
         }
         .model-wrapper {
             width: 100vw;
-            height: 100vh;
+            height: 100dvh;
             margin: 0 auto;
             position: relative;
         }
@@ -73,6 +73,17 @@
         .button-control-gp #modelResetButton {
             --size: 42px;
         }
+        #ar-button {
+            position: relative;
+            z-index: 10;
+            display: block;
+            margin: 40px auto;
+            background: none;
+            border: none;
+        }
+        #ar-button img {
+            width: 60px;
+        }
     </style>
 </head>
 <body>
@@ -80,8 +91,8 @@
     <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
         <model-viewer id="ModelViewer" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" ar shadow-intensity="0.5" camera-controls touch-action="pan-y" camera-orbit="-35deg 90deg auto" field-of-view="40deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2">
-            <button slot="ar-button" id="ar-button" style="position: relative; z-index: 10; display: block; margin: 40px auto; height: 40px;">
-                View in your space
+            <button slot="ar-button" id="ar-button">
+                <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
         </model-viewer>
         <div class="button-control-gp">
@@ -90,7 +101,6 @@
             <button id="modelResetButton"><img src="https://img.icons8.com/ios/50/ffffff/recurring-appointment.svg" alt="reset"/></button>
         </div>
     </div>
-    <div id="fov" style="color: #fff; text-align: center; margin-top: 40px; position: fixed; z-index: 9; top: 0; left: 0;"></div>
   
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
