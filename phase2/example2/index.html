@@ -16,7 +16,7 @@
             box-sizing: border-box;
         }
         body {
-            min-height: 150vh;
+            /* min-height: 150vh; */
             background-color: #3e3e3e;
         }
         .scroll-area {
@@ -101,32 +101,38 @@
     <div class="scroll-area scroll-area--l"></div>
     <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
-        <model-viewer id="ModelViewer" src="../example2/uploads_files_2951928_Totoro.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2" -disable-pan>
+        <model-viewer class="ModelViewer" src="../example2/uploads_files_2951928_Totoro.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2" -disable-pan>
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
         </model-viewer>
         <div class="button-control-gp">
-            <button id="modelZoomOutButton"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
-            <button id="modelZoomInButton"><img src="https://img.icons8.com/ios/50/ffffff/plus--v1.svg" alt="plus"/></button>
-            <button id="modelResetButton"><img src="https://img.icons8.com/ios/50/ffffff/recurring-appointment.svg" alt="reset"/></button>
+            <button class="modelZoomOutButton"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
+            <button class="modelZoomInButton"><img src="https://img.icons8.com/ios/50/ffffff/plus--v1.svg" alt="plus"/></button>
+            <button class="modelResetButton"><img src="https://img.icons8.com/ios/50/ffffff/recurring-appointment.svg" alt="reset"/></button>
         </div>
     </div>
-  
+
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script>
-        const modelViewer = document.querySelector('#ModelViewer');
-        const originalFOV = $('#ModelViewer').attr('field-of-view');
-        const originalCameraOrbit = $('#ModelViewer').attr('camera-orbit');
-        $('#modelZoomInButton').on('click',function(){
-            modelViewer.zoom(10)
-        });
-        $('#modelZoomOutButton').on('click',function(){
-            modelViewer.zoom(-10)
-        });
-        $('#modelResetButton').on('click',function(){
-            $('#ModelViewer').attr('camera-orbit', originalCameraOrbit).attr('field-of-view', originalFOV);
+        $('.model-wrapper').each(function(){
+            const $this = $(this);
+            const modelViewer = $this.find('model-viewer');
+            const modelZoomInButton = $this.find('.modelZoomInButton');
+            const modelZoomOutButton = $this.find('.modelZoomOutButton');
+            const modelResetButton = $this.find('.modelResetButton');
+
+            modelViewer.attr('data-field-of-view', modelViewer.attr('field-of-view')).attr('data-camera-orbit', modelViewer.attr('camera-orbit'));
+            modelZoomInButton.on('click',function(){
+                modelViewer[0].zoom(10)
+            });
+            modelZoomOutButton.on('click',function(){
+                modelViewer[0].zoom(-10)
+            });
+            modelResetButton.on('click',function(){
+                modelViewer.attr('camera-orbit', modelViewer.attr('data-camera-orbit')).attr('field-of-view', modelViewer.attr('data-field-of-view'));
+            });
         });
     </script>
 </body>
