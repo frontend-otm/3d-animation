@@ -19,8 +19,8 @@
             /* min-height: 150vh; */
             background-color: #8f9599;
         }
-        .scroll-area {
-            position: fixed;
+        /* .scroll-area {
+            position: absolute;
             top: 0;
             bottom: 0;
             z-index: 9;
@@ -32,13 +32,29 @@
         .scroll-area--r {
             left: 0;
             right: var(--scroll-area-size);
-        }
+        } */
         .model-wrapper {
             width: 100vw;
             height: var(--model-h);
             margin: 0 auto;
             position: relative;
             user-select: none;
+        }
+        .model-wrapper::before,
+        .model-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 9;
+        }
+        .model-wrapper::before {
+            left: var(--scroll-area-size);
+            right: 0;
+        }
+        .model-wrapper::after {
+            left: 0;
+            right: var(--scroll-area-size);
         }
         model-viewer {
             width: 100%;
@@ -98,9 +114,9 @@
     </style>
 </head>
 <body>
-    <div class="scroll-area scroll-area--l"></div>
-    <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
+        <!-- <div class="scroll-area scroll-area--l"></div>
+        <div class="scroll-area scroll-area--r"></div> -->
         <model-viewer class="ModelViewer" src="../example2/casio_edifice_watch.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan poster="../example2/poster.webp">
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
