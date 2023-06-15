@@ -101,15 +101,16 @@
     <div class="scroll-area scroll-area--l"></div>
     <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
-        <model-viewer class="ModelViewer" src="../example2/casio_edifice_watch.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2" -disable-pan>
+        <model-viewer class="ModelViewer" src="../example2/casio_edifice_watch.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan poster="../example2/poster.webp">
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
+            <!-- <div slot="poster">Loading 3D Model</div> -->
         </model-viewer>
         <div class="button-control-gp">
-            <button class="modelZoomOutButton"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
-            <button class="modelZoomInButton"><img src="https://img.icons8.com/ios/50/ffffff/plus--v1.svg" alt="plus"/></button>
-            <button class="modelResetButton"><img src="https://img.icons8.com/ios/50/ffffff/recurring-appointment.svg" alt="reset"/></button>
+            <button class="model-zoom-out-button"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
+            <button class="model-zoom-in-button"><img src="https://img.icons8.com/ios/50/ffffff/plus--v1.svg" alt="plus"/></button>
+            <button class="model-reset-button"><img src="https://img.icons8.com/ios/50/ffffff/recurring-appointment.svg" alt="reset"/></button>
         </div>
     </div>
 
@@ -119,9 +120,9 @@
         $('.model-wrapper').each(function(){
             const $this = $(this);
             const modelViewer = $this.find('model-viewer');
-            const modelZoomInButton = $this.find('.modelZoomInButton');
-            const modelZoomOutButton = $this.find('.modelZoomOutButton');
-            const modelResetButton = $this.find('.modelResetButton');
+            const modelZoomInButton = $this.find('.model-zoom-in-button');
+            const modelZoomOutButton = $this.find('.model-zoom-out-button');
+            const modelResetButton = $this.find('.model-reset-button');
 
             modelViewer.attr('data-field-of-view', modelViewer.attr('field-of-view')).attr('data-camera-orbit', modelViewer.attr('camera-orbit'));
             modelZoomInButton.on('click',function(){
