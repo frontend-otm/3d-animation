@@ -18,8 +18,6 @@
         body {
             /* min-height: 150vh; */
             /* background-color: #8f9599; */
-            background: rgb(160,166,171);
-            background: radial-gradient(circle, rgba(160,166,171,1) 0%, rgba(55,58,60,1) 100%);
         }
         /* .scroll-area {
             position: absolute;
@@ -41,6 +39,8 @@
             margin: 0 auto;
             position: relative;
             user-select: none;
+            background: rgb(160,166,171);
+            background: radial-gradient(circle, rgba(160,166,171,1) 0%, rgba(55,58,60,1) 100%);
         }
         .model-wrapper::before,
         .model-wrapper::after {
@@ -119,7 +119,7 @@
     <div class="model-wrapper">
         <!-- <div class="scroll-area scroll-area--l"></div>
         <div class="scroll-area scroll-area--r"></div> -->
-        <model-viewer class="ModelViewer" src="../example2/casio_edifice_watch.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan -poster="../example2/poster.webp">
+        <model-viewer class="ModelViewer" src="../example2/zakuhead_testmodel.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan -poster="../example2/poster.webp">
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
@@ -152,6 +152,35 @@
             modelResetButton.on('click',function(){
                 modelViewer.attr('camera-orbit', modelViewer.attr('data-camera-orbit')).attr('field-of-view', modelViewer.attr('data-field-of-view'));
             });
+
+            
+            // Model load finished
+            modelViewer[0].addEventListener('model-visibility', function(e) {
+                if ($(window).width() < 1024) {
+                    modelViewer[0].zoom(7)
+                }
+                else {
+                    modelViewer[0].zoom(0)
+                }
+
+                /* let resizeTimeout;
+                $(window).on('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        console.log('Window resize finished');
+                        if ($(window).width() < 1024) {
+                            modelViewer[0].zoom(-7)
+                            modelViewer[0].zoom(7)
+                            setTimeout(function() {
+                                
+                            }, 300)
+                        }
+                        else {
+                            modelViewer[0].zoom(0)
+                        }
+                    }, 300);
+                }); */
+            })
         });
     </script>
 </body>
