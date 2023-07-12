@@ -16,11 +16,11 @@
             box-sizing: border-box;
         }
         body {
-            min-height: 150vh;
-            background-color: #151515;
+            /* min-height: 150vh; */
+            /* background-color: #8f9599; */
         }
-        .scroll-area {
-            position: fixed;
+        /* .scroll-area {
+            position: absolute;
             top: 0;
             bottom: 0;
             z-index: 9;
@@ -32,13 +32,31 @@
         .scroll-area--r {
             left: 0;
             right: var(--scroll-area-size);
-        }
+        } */
         .model-wrapper {
             width: 100vw;
             height: var(--model-h);
             margin: 0 auto;
             position: relative;
             user-select: none;
+            background: rgb(160,166,171);
+            background: radial-gradient(circle, rgba(160,166,171,1) 0%, rgba(55,58,60,1) 100%);
+        }
+        .model-wrapper::before,
+        .model-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 9;
+        }
+        .model-wrapper::before {
+            left: var(--scroll-area-size);
+            right: 0;
+        }
+        .model-wrapper::after {
+            left: 0;
+            right: var(--scroll-area-size);
         }
         model-viewer {
             width: 100%;
@@ -98,35 +116,71 @@
     </style>
 </head>
 <body>
-    <div class="scroll-area scroll-area--l"></div>
-    <div class="scroll-area scroll-area--r"></div>
     <div class="model-wrapper">
-        <model-viewer id="ModelViewer" src="../example2/uploads_files_2951928_Totoro.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="2" -disable-pan>
+        <!-- <div class="scroll-area scroll-area--l"></div>
+        <div class="scroll-area scroll-area--r"></div> -->
+        <model-viewer class="ModelViewer" src="../example2/zakuhead_testmodel.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan -poster="../example2/poster.webp">
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
+            <!-- <div slot="poster">Loading 3D Model</div> -->
         </model-viewer>
         <div class="button-control-gp">
-            <button id="modelZoomOutButton"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
-            <button id="modelZoomInButton"><img src="https://img.icons8.com/ios/50/ffffff/plus--v1.svg" alt="plus"/></button>
-            <button id="modelResetButton"><img src="https://img.icons8.com/ios/50/ffffff/recurring-appointment.svg" alt="reset"/></button>
+            <button class="model-zoom-out-button"><img src="https://img.icons8.com/ios/50/ffffff/minus.svg" alt="minus"/></button>
+            <button class="model-zoom-in-button"><img src="https://img.icons8.com/ios/50/ffffff/plus--v1.svg" alt="plus"/></button>
+            <button class="model-reset-button"><img src="https://img.icons8.com/ios/50/ffffff/recurring-appointment.svg" alt="reset"/></button>
         </div>
     </div>
-  
+
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script>
-        const modelViewer = document.querySelector('#ModelViewer');
-        const originalFOV = $('#ModelViewer').attr('field-of-view');
-        const originalCameraOrbit = $('#ModelViewer').attr('camera-orbit');
-        $('#modelZoomInButton').on('click',function(){
-            modelViewer.zoom(10)
-        });
-        $('#modelZoomOutButton').on('click',function(){
-            modelViewer.zoom(-10)
-        });
-        $('#modelResetButton').on('click',function(){
-            $('#ModelViewer').attr('camera-orbit', originalCameraOrbit).attr('field-of-view', originalFOV);
+        $('.model-wrapper').each(function(){
+            const $this = $(this);
+            const modelViewer = $this.find('model-viewer');
+            const modelZoomInButton = $this.find('.model-zoom-in-button');
+            const modelZoomOutButton = $this.find('.model-zoom-out-button');
+            const modelResetButton = $this.find('.model-reset-button');
+
+            modelViewer.attr('data-field-of-view', modelViewer.attr('field-of-view')).attr('data-camera-orbit', modelViewer.attr('camera-orbit'));
+            modelZoomInButton.on('click',function(){
+                modelViewer[0].zoom(5)
+            });
+            modelZoomOutButton.on('click',function(){
+                modelViewer[0].zoom(-5)
+            });
+            modelResetButton.on('click',function(){
+                modelViewer.attr('camera-orbit', modelViewer.attr('data-camera-orbit')).attr('field-of-view', modelViewer.attr('data-field-of-view'));
+            });
+
+            
+            // Model load finished
+            modelViewer[0].addEventListener('model-visibility', function(e) {
+                if ($(window).width() < 1024) {
+                    modelViewer[0].zoom(7)
+                }
+                else {
+                    modelViewer[0].zoom(0)
+                }
+
+                /* let resizeTimeout;
+                $(window).on('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        console.log('Window resize finished');
+                        if ($(window).width() < 1024) {
+                            modelViewer[0].zoom(-7)
+                            modelViewer[0].zoom(7)
+                            setTimeout(function() {
+                                
+                            }, 300)
+                        }
+                        else {
+                            modelViewer[0].zoom(0)
+                        }
+                    }, 300);
+                }); */
+            })
         });
     </script>
 </body>
