@@ -187,11 +187,13 @@
         modelViewer.addEventListener('model-viewer-load', () => {
             modelViewer.setCameraOrbit(-90, 0, 1.5); // Adjust camera position if needed
             modelViewer.setHotspotPitchAndYaw(-15, 0); // Adjust initial pitch and yaw if needed
-            modelViewer.scale = '0.5'; // Set the scale for AR
 
-            // Start AR mode
-            modelViewer.activateAR().catch((error) => {
-            console.error('Error starting AR:', error);
+            modelViewer.addEventListener('ar-status-change', (event) => {
+            if (event.detail && event.detail.status === 'entered') {
+                modelViewer.scale = '0.1'; // Set the scale for AR
+            } else {
+                modelViewer.scale = '1.0'; // Reset the scale for the website view
+            }
             });
         });
     </script>
