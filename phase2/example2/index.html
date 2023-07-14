@@ -107,6 +107,15 @@
         #ar-button img {
             width: 60px;
         }
+        h6 {
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #fff;
+            z-index: 99;
+        }
         @media (min-width: 768px) {
             :root {
                 --scroll-area-size: 70%;
@@ -116,11 +125,11 @@
     </style>
 </head>
 <body>
-    <h1>Model edit 4 add alpha</h1>
+    <h6>Model edit 3 add alpha</h6>
     <div class="model-wrapper">
         <!-- <div class="scroll-area scroll-area--l"></div>
         <div class="scroll-area scroll-area--r"></div> -->
-        <model-viewer id="modelViewer" class="ModelViewer" src="../example2/zakuhead_testmodel-edit4.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan -poster="../example2/poster.webp">
+        <model-viewer id="modelViewer" class="ModelViewer" src="../example2/zakuhead_testmodel-edit3.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan -poster="../example2/poster.webp">
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
