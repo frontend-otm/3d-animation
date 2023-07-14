@@ -116,11 +116,11 @@
     </style>
 </head>
 <body>
-    <h1>2</h1>
+    <h1>Model edit 1</h1>
     <div class="model-wrapper">
         <!-- <div class="scroll-area scroll-area--l"></div>
         <div class="scroll-area scroll-area--r"></div> -->
-        <model-viewer id="modelViewer" class="ModelViewer" src="../example2/zakuhead_testmodel.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan -poster="../example2/poster.webp">
+        <model-viewer id="modelViewer" class="ModelViewer" src="../example2/zakuhead_testmodel-edit.glb" ar shadow-intensity="1" camera-controls camera-orbit="-35deg 90deg auto" field-of-view="65deg" min-field-of-view="0deg" max-field-of-view="90deg" orbit-sensitivity="1" -disable-pan -poster="../example2/poster.webp">
             <button slot="ar-button" id="ar-button">
                 <img src="https://img.icons8.com/fluency-systems-filled/48/ffffff/augmented-reality.svg" alt=""/>
             </button>
@@ -182,20 +182,6 @@
                     }, 300);
                 }); */
             })
-        });
-
-        const modelViewer = document.getElementById('modelViewer');
-        modelViewer.addEventListener('model-viewer-load', () => {
-            modelViewer.setCameraOrbit(-90, 0, 1.5); // Adjust camera position if needed
-            modelViewer.setHotspotPitchAndYaw(-15, 0); // Adjust initial pitch and yaw if needed
-
-            modelViewer.addEventListener('ar-status-change', (event) => {
-            if (event.detail && event.detail.status === 'entered') {
-                modelViewer.scale = '0.1'; // Set the scale for AR
-            } else {
-                modelViewer.scale = '1.0'; // Reset the scale for the website view
-            }
-            });
         });
     </script>
 </body>
