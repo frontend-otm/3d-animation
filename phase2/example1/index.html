@@ -2,18 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebAR</title>
-
-    <!-- Tailwindcss -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Import the component -->
+    <title>AR.js</title>
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
-<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
-    <!-- style for the loader -->
     <style>
       .arjs-loader {
         height: 100%;
@@ -34,30 +26,31 @@
         color: white;
       }
     </style>
+    <!-- rawgithack development URL -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   </head>
-
-  <body class="overflow-hidden">
+  <body style="margin: 0px; overflow: hidden">
     <!-- minimal loader shown until image descriptors are loaded -->
-    <!-- <div class="arjs-loader">
+    <div class="arjs-loader">
       <div>Loading, please wait...</div>
-    </div> -->
+    </div>
     <a-scene
       vr-mode-ui="enabled: false;"
       renderer="logarithmicDepthBuffer: true; precision: medium;"
       embedded
       arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
     >
-      <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
+      <!-- use rawgithack to retrieve the correct url for nft marker (see 'trex' below) -->
       <a-nft
         type="nft"
-        url="trex/trex-image/trex"
+        url="./trex/trex-image/trex"
         smooth="true"
         smoothCount="10"
         smoothTolerance="0.01"
         smoothThreshold="5"
       >
         <a-entity
-          gltf-model="trex/scene.gltf"
+          gltf-model="./trex/scene.gltf"
           scale="5 5 5"
           position="150 300 -100"
         >
