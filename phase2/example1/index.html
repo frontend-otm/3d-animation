@@ -1,56 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Example 1</title>
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
 
-    <!-- Tailwindcss -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    <!-- Import the component -->
-    <script
-      type="module"
-      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"
-    ></script>
-  </head>
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+</style>
 
-  <body class="bg-gray-50">
-    <section class="h-screen flex flex-col justify-center text-center">
-      <div class="container p-4 mx-auto">
-        <h1>3D/AR Prototyping</h1>
-        <p>Example 1</p>
-      </div>
-    </section>
-    <section class="h-screen bg-white">
-      <div class="container px-4 mx-auto h-full">
-        <div class="h-full lg:grid lg:grid-cols-2 lg:gap-4 lg:items-center">
-          <div class="h-[50dvh] lg:h-full">
-            <model-viewer
-              alt="Zakuhead Testmodel"
-              class="model-viewer w-full h-full"
-              src="zakuhead_testmodel.glb"
-              ar
-              ar-scale="fixed"
-              shadow-intensity="1"
-              camera-controls
-              touch-action="pan-y"
-              xr-environment
-            >
-          </model-viewer>
-          </div>
-          <div class="py-4">
-            <h2 class="font-bold text-xl mb-4">Zakuhead Testmodel</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque corrupti cupiditate, recusandae dolores eum repudiandae ipsam quibusdam aspernatur dolor facere accusantium vero sequi obcaecati impedit molestias libero rerum! Vero, perspiciatis.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="h-screen flex flex-col justify-center text-center">
-      <div class="container p-4 mx-auto">
-        <p>End</p>
-      </div>
-    </section>
-  </body>
-</html>
+<!-- rawgithack development URL -->
+<!--<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>-->
+<script src='https://frontend-otm.github.io/3d-animation/phase2/example1/build/aframe-ar-nft.js'></script>
+
+
+<body style='margin : 0px; overflow: hidden;'>
+   <!-- minimal loader shown until image descriptors are loaded -->
+  <div class="arjs-loader">
+    <div>Loading, please wait...</div>
+  </div>
+    <a-scene
+        vr-mode-ui='enabled: false;'
+        renderer="logarithmicDepthBuffer: true; precision: medium;"
+        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
+
+        <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
+        <!-- /Users/ratanontsukapan/Projects/3d-animation/phase2/example1/zakuhead/zakuhead-image/zakuhead_testmodel.fset  -->
+        <a-nft
+            type='nft' url='https://frontend-otm.github.io/3d-animation/phase2/example1/zakuhead/zakuhead-image/zakuhead_testmodel'>
+            <a-entity
+                gltf-model='https://frontend-otm.github.io/3d-animation/phase2/example1/zakuhead/zakuhead_testmodel.glb' scale="100 100 100" rotation="-90 0 0" position="0 0 0">
+            </a-entity>
+        </a-nft>
+		<a-entity camera></a-entity>
+    </a-scene>
+</body>
