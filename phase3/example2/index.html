@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 2</title>
+    <style>
+        :root {
+            --scroll-area-size: 88%;
+            --model-h: 90vh;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .model-wrapper {
+            width: 100vw;
+            height: 5000px;
+            margin: 0 auto;
+            position: relative;
+            user-select: none;
+        }
+        .model-wrapper::before,
+        .model-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 9;
+            display: none;
+        }
+        .model-wrapper::before {
+            left: var(--scroll-area-size);
+            right: 0;
+        }
+        .model-wrapper::after {
+            left: 0;
+            right: var(--scroll-area-size);
+        }
+        model-viewer {
+            width: 100%;
+            height: 100dvh;
+            outline: none;
+            border: none;
+            position: sticky;
+            top: 0;
+        }
+        @media (min-width: 768px) {
+            :root {
+                --scroll-area-size: 70%;
+                --model-h: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="model-wrapper">
+        <model-viewer id="demo"
+            -camera-controls
+            touch-action="pan-y"
+            autoplay animation-name="Idle"
+            -ar
+            -ar-modes="webxr scene-viewer"
+            shadow-intensity="1"
+            src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"
+            alt="An animated 3D model of a robot"
+            -camera-orbit="calc((0deg + env(window-scroll-y) * 6.3)) 90deg auto"
+        >
+            <button type="button"
+                onclick="playAnimation('Running','loop')"
+                slot="hotspot-head" 
+                data-position="-1.5 4 2" 
+                data-normal="0 0 0"
+            >
+            Running
+            </button>
+            <button type="button"
+                onclick="playAnimation('Standing','once')"
+                slot="hotspot-leg" 
+                data-position="-1.5 3.7 2" 
+                data-normal="0 0 0"
+            >
+            Stop
+            </button>
+        </model-viewer>
+    </div>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script>
+        /* function Focus_Bleu() {
+             const modelViewer = document.querySelector('#demo');
+             modelViewer.currentTime = window.scrollY / 100;    
+             window.requestAnimationFrame(Focus_Bleu);
+         }
+         
+        function StartScroll() {
+            window.requestAnimationFrame(Focus_Bleu);
+        } */
+        const modelViewer = $("#demo");
+        let animationPlayed = false;
+
+        function playAnimation(animation_name,animation_type) {
+            modelViewer[0].animationName = animation_name;
+            setTimeout(function() {
+                if (animation_type == 'once') {
+                    modelViewer[0].play({repetitions: 1});
+                    modelViewer[0].addEventListener('finished', pause);
+                } else if(animation_type == 'loop'){
+                    modelViewer[0].play();
+                }
+            }, 100)
+        }
+        const pause = () => {
+            modelViewer[0].pause();
+        }
+
+        playAnimation('Idle', 'loop');
+
+        $(window).scroll(function () {
+            let currentScroll = $(window).scrollTop();
+            if (currentScroll > 1000 && currentScroll < 1500) {
+                modelViewer.attr('camera-orbit','0deg 95deg 2mm').attr('camera-target', '0m 3.2m 0m');
+            }
+            else if (currentScroll > 1500 && currentScroll < 2000) {
+                modelViewer.attr('camera-orbit','0deg 75deg 2mm').attr('camera-target', '0m 0.5m 0m');
+            }
+            else if (currentScroll > 2000 && currentScroll < 2500) {
+                modelViewer.attr('camera-orbit','90deg 75deg 2mm').attr('camera-target', 'auto auto auto');
+            }
+            else if (currentScroll > 2500 && currentScroll < 3500) {
+                modelViewer.attr('camera-orbit','180deg 75deg 105%').attr('camera-target', 'auto auto auto');
+            }
+            else {
+                modelViewer.removeAttr('camera-orbit').attr('camera-target', 'auto auto auto');
+            }
+
+            if (currentScroll > 3500 && !animationPlayed) {
+                playAnimation('Running', 'loop');
+                animationPlayed = true;
+            } else if (currentScroll < 3500 && currentScroll > 300) {
+                playAnimation('Idle', 'once');
+            } else if (currentScroll <= 300) {
+                animationPlayed = false;
+                playAnimation('Wave', 'once');
+            }
+
+        });
+    </script>
+</body>
+</html>
