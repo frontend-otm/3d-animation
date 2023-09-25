@@ -134,16 +134,18 @@
             else {
                 modelViewer.removeAttr('camera-orbit').attr('camera-target', 'auto auto auto');
             }
-
-            if (currentScroll > 3500 && !animationPlayed) {
-                playAnimation('Running', 'loop');
-                animationPlayed = true;
-            } else if (currentScroll < 3500 && currentScroll > 300) {
+            
+            if (currentScroll < 3500 && currentScroll > 300) {
                 playAnimation('Idle', 'once');
             } else if (currentScroll <= 300) {
                 animationPlayed = false;
                 playAnimation('Wave', 'once');
             }
+
+            if (currentScroll > 3500 && !animationPlayed) {
+                playAnimation('Running', 'loop');
+                animationPlayed = true;
+            } 
 
         });
     </script>
